@@ -1,7 +1,8 @@
 const debug = require('debug')('app:books.controller');
 const chalk = require('chalk');
+const Book = require('../models/bookModel');
 
-function bookController(Book) {
+function bookController() {
   function midlewareGetBook(req, res, next) {
     const { id } = req.params;
     debug(`${chalk.bgCyanBright('MIDLEWARE')} Book id = ${id}`);
@@ -39,14 +40,9 @@ function bookController(Book) {
 
   function createBook(req, res) {
     const book = new Book(req.body);
-    if (!book.title) {
-      res.status(400);
-      return res.send('Title is required');
-    }
     debug(book);
     book.save();
-    res.status(201);
-    return res.json(book);
+    return res.status(201).json(book);
   }
 
   function getById(req, res) {

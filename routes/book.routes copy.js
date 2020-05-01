@@ -3,7 +3,7 @@ const bookController = require('../controllers/books.controller');
 
 const bookRouter = express.Router();
 
-function bookRoutes(book) {
+function bookRoutes() {
   const {
     getAllBooks,
     createBook,
@@ -12,7 +12,7 @@ function bookRoutes(book) {
     midlewareGetBook,
     patchBook,
     deleteBook
-  } = bookController(book);
+  } = bookController();
 
   bookRouter.use('/:id', midlewareGetBook);
 
